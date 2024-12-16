@@ -7,7 +7,7 @@ In real-time audio, deadlines are critical. Your code has on the order of severa
 
 In order to prevent this, real-time audio code must avoid performing any operations that can block the audio thread for an unbounded or unpredictable amount of time. Such operations include file and network I/O, memory allocation and deallocation, and the use of locks to synchronize with non-audio threads; these operations are not considered "real-time safe." Instead, operations like I/O and memory allocation should be performed on other threads, and synchronization should be performed using primitives that are wait-free for the audio thread. A more thorough overview of the subject can be found in Ross Bencina's now-classic blog post ["Time Waits for Nothing"](http://www.rossbencina.com/code/real-time-audio-programming-101-time-waits-for-nothing).
 
-Given that audio software generally does need to allocate memory and make use of it from the audio thread, the question becomes how to accomplish this in a manageable and efficient way while subject to the above constraints. [Basedrop](https://github.com/glowcoil/basedrop) is my attempt at providing one answer to this question.
+Given that audio software generally does need to allocate memory and make use of it from the audio thread, the question becomes how to accomplish this in a manageable and efficient way while subject to the above constraints. [Basedrop](https://github.com/micahrj/basedrop) is my attempt at providing one answer to this question.
 
 <!--excerpt-->
 

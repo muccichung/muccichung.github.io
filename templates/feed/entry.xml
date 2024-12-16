@@ -1,9 +1,9 @@
 <entry>
-    <id>https://glowcoil.com/${url}</id>
+    <id>https://micahrj.github.io/${url}</id>
     <title type="html">${title}</title>
     <published>${published}</published>
     <updated>${updated}</updated>
-    <link rel="alternate" href="https://glowcoil.com/${url}" type="text/html"/>
+    <link rel="alternate" href="https://micahrj.github.io/${url}" type="text/html"/>
     <content type="html">
         <![CDATA[
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">

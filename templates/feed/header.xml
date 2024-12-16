@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://glowcoil.com/feed.xml</id>
-    <title>glowcoil's blog</title>
+    <id>https://micahrj.github.io/feed.xml</id>
+    <title>micah's blog</title>
     <updated>${updated}</updated>
-    <link rel="alternate" href="https://glowcoil.com/" type="text/html"/>
-    <link rel="self" href="https://glowcoil.com/feed.xml" type="application/atom+xml"/>
+    <link rel="alternate" href="https://micahrj.github.io/" type="text/html"/>
+    <link rel="self" href="https://micahrj.github.io/feed.xml" type="application/atom+xml"/>
