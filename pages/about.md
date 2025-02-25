@@ -1,5 +1,3 @@
 # About Me
 
-My name is Micah Johnston. I'm a software engineer interested in graphics, audio, and signal processing. I work professionally in the game industry as a graphics programmer, and in my spare time I tinker with writing plugins and audio software in Rust.
-
-I also occasionally make [electronic music](https://soundcloud.com/glowcoil) and [games](https://itch.io/glowcoil) in a hobbyist capacity; every once in a while I [livestream](https://twitch.tv/glowcoil) and post [videos](https://www.youtube.com/channel/UCfVY8etcCH0pMUQouacdAvA); and I have been known to give at least one [conference talk](https://www.youtube.com/watch?v=9MAC3bojeyo).
+我长在南方一座小城，每当夏夜，月光撒进地堂，鱼塘荡起蛙鸣；我枕在阿婆腿上，夜风温柔，满天繁星入帘，流萤忽闪忽停；现在回想，虽记忆犹新，却已是30年前的事情了。
