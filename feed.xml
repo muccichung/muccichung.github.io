@@ -2,9 +2,38 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://micahrj.github.io/feed.xml</id>
     <title>micah's blog</title>
-    <updated>2025-02-25T07:10:23Z</updated>
+    <updated>2025-02-25T07:31:09Z</updated>
     <link rel="alternate" href="https://micahrj.github.io/" type="text/html"/>
     <link rel="self" href="https://micahrj.github.io/feed.xml" type="application/atom+xml"/>
+<entry>
+    <id>https://micahrj.github.io/posts/lenovo-m920x-unlock-bios</id>
+    <title type="html">联想M920X解锁BIOS高级菜单教程</title>
+    <published>2025-02-25T14:50:44-06:00</published>
+    <updated>2025-02-25T14:50:44-06:00</updated>
+    <link rel="alternate" href="https://micahrj.github.io/posts/lenovo-m920x-unlock-bios" type="text/html"/>
+    <content type="html">
+        <![CDATA[
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+            <p>去年闲暇的时候，把10年前的大主机换成了小巧的联想M920X，搭配CC150、Sparkle Arc A380半高刀卡。在官方说明中，这张A380仅兼容intel 10代以上平台，但我们可以关闭CSM，在老平台将其点亮，而要发挥其全部性能，则必须打开Resizable Bar和Above 4G Decoding。联想官方BIOS中隐藏了以上两个高级选项，需要解锁，另外，本机已提前解锁电源识别和PCIE功耗。</p><img alt="开孔很差劲的散热。" src="/posts/2025-05-25-lenovo-m920x-unlock-bios/m920x.jpg" />
+<p>使用到的工具：CH341A编程器，以及WinHex、UEFITool等铺助修改软件（后面提供下载地址）。</p><p><strong>注意：刷BIOS有风险，存在丢失保修和设备损坏之风险！</strong></p><h3>备份</h3><p>使用CH341A编程器分别读取两个独立的BIOS芯片，保存为16mb.bin、8mb.bin并备份；</p><h3>合并</h3><p>打开WinHex，通过“工具&gt;文件工具&gt;文件合并”合并上面保存的两个文件，命名为main.bin；</p><!--excerpt-->
+<h3>修改</h3><p>使用UEFITool Ne打开main.bin，Ctrl+F切换到Text，查找“setup mode”，在搜索结果中双击定位，找到名为Setup的DXE driver，记录下GUID，如本例：899407D7-99FE-43D8-9A21-79EC328CAC21，右键PE32 image section，选择Extract as is并保存；</p><img alt="双击定位，记住右边的GUID。" src="/posts/2025-05-25-lenovo-m920x-unlock-bios/setupmode.png" />
+<p>Windows下打开CMD，输入D:（ifrextractor.exe和以上生成的.sct文件所在盘）,输入CD XXX（ ifrextractor.exe所在文件夹地址），再输入<code>ifrextractor &quot;Section_PE32_image_Setup_Setup.sct&quot; verbose</code>， 会自动生成一个txt文件 ；</p><img alt="先进所在盘，再进所在文件夹。" src="/posts/2025-05-25-lenovo-m920x-unlock-bios/cmd.png" />
+<p>在UEFITool Ne中继续查找“AMITSE”，上级为AMITSE即正解，右键PE32 image section，选择Extract as is并保存；</p><p>再往下滚动，找到setupdata，往下展开2次，右键第二个setupdata，选择Extract body并保存；</p><p>获取以上四个文件后，打开在线工具<a href="https://boringboredom.github.io/UEFI-Editor/">UEFI Editor</a>，逐一对应上传，打开后在页面左下角通过Search功能，搜索对应BIOS选项；</p><img alt="要对应上传，有提示。" src="/posts/2025-05-25-lenovo-m920x-unlock-bios/uefieditor.png" />
+<p>取消Suppress if列的红框表示取消隐藏该项内容，需要注意的是，取消某个隐藏项，需同时取消其上级项的隐藏；如Above 4G，其菜单逐层为Chipset&gt;System Agent(SA) Configuration&gt;Above 4GB MMIO BIOSassignment，Chipset的红框也要取消，按需取消隐藏后，点击UEFI files下载保存；</p><img alt="above 4g在chipset底下的底下。" src="/posts/2025-05-25-lenovo-m920x-unlock-bios/chipset.png" />
+<p>使用UEFITool（换软件了）打开main.bin，Ctrl+F搜索899407D7-99FE-43D8-9A21-79EC328CAC21（同上），右键PE32 image section，选择Replace as is，选择在UEFI Editor中保存的sct文件替换；</p><img alt="确认replace成功。" src="/posts/2025-05-25-lenovo-m920x-unlock-bios/replace.png" />
+<h3>添加Resizable Bar</h3><p>ReBarUEFI项目：<a href="https://github.com/xCuri0/ReBarUEFI">https://github.com/xCuri0/ReBarUEFI</a></p><p>添加FFS模块：<a href="https://github.com/xCuri0/ReBarUEFI/wiki/Adding-FFS-module">https://github.com/xCuri0/ReBarUEFI/wiki/Adding-FFS-module</a></p><p>继续使用UEFITool打开main.bin，Ctrl+F切换到GUID项，搜索“A0327FE0-1FDA-4E5B-905D-B510C45A61D0”，在搜索结果中双击定位，右键选择Insert after，导入ReBarDxe.ffs，确认成功，保存为new_main.bin；</p><h3>分割</h3><p>打开WinHex，将new_main.bin，通过“工具&gt;文件工具&gt;文件分割”分割成一个16MB、一个8MB的文件，分别命名new_16mb.bin和new_8mb.bin；</p><h3>刷入</h3><p>将新分割的两个文件刷入对应的芯片中；</p><p>在BIOS中开启Above 4G Decoding、关闭CSM，进入桌面，运行ReBarState.exe，选择32，重启电脑即可。</p><img alt="状态都正常，然后跑个分试试。" src="/posts/2025-05-25-lenovo-m920x-unlock-bios/rebar.png" />
+<p>以上使用到工具的地址：</p><p>UEFITool：<a href="https://github.com/LongSoft/UEFITool">https://github.com/LongSoft/UEFITool</a></p><p>WinHex：<a href="http://www.winhex.com/winhex/index-m.html">http://www.winhex.com/winhex/index-m.html</a></p><p>IFRExtractor：<a href="https://github.com/LongSoft/IFRExtractor-RS">https://github.com/LongSoft/IFRExtractor-RS</a></p><h3>后续</h3><p>使用他人备份的BIOS刷机，会出现各种奇怪问题，如开机慢，这时我们需要替换一个纯净的ME（状态为configured）；</p><p>需要开启OverClocking Performance Menu，请修改M1UKT67A或更早版本BIOS <a href="https://newsupport.lenovo.com.cn/driveDownloads_detail.html?driveId=126093">下载地址</a>；通过调节AC Loadline和CPU Core Vlotage offset，可以有效降低功耗和温度。</p><img alt="温度下降明显，可上更高性能的CPU。" src="/posts/2025-05-25-lenovo-m920x-unlock-bios/acloadline.png" />
+
+        ]]>
+    </content>
+    <summary type="html">
+        <![CDATA[
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+            <p>去年闲暇的时候，把10年前的大主机换成了小巧的联想M920X，搭配CC150、Sparkle Arc A380半高刀卡。在官方说明中，这张A380仅兼容intel 10代以上平台，但我们可以关闭CSM，在老平台将其点亮，而要发挥其全部性能，则必须打开Resizable Bar和Above 4G Decoding。联想官方BIOS中隐藏了以上两个高级选项，需要解锁，另外，本机已提前解锁电源识别和PCIE功耗。</p><img alt="开孔很差劲的散热。" src="/posts/2025-05-25-lenovo-m920x-unlock-bios/m920x.jpg" />
+<p>使用到的工具：CH341A编程器，以及WinHex、UEFITool等铺助修改软件（后面提供下载地址）。</p><p><strong>注意：刷BIOS有风险，存在丢失保修和设备损坏之风险！</strong></p><h3>备份</h3><p>使用CH341A编程器分别读取两个独立的BIOS芯片，保存为16mb.bin、8mb.bin并备份；</p><h3>合并</h3><p>打开WinHex，通过“工具&gt;文件工具&gt;文件合并”合并上面保存的两个文件，命名为main.bin；</p>
+        ]]>
+    </summary>
+</entry>
 <entry>
     <id>https://micahrj.github.io/posts/llq</id>
     <title type="html">LLQ: A wait-free SPSC linked-list queue with recyclable nodes</title>

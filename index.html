@@ -1,36 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=335">
-        <title>home — micah johnston</title>
-        <link rel="stylesheet" href="https://use.typekit.net/byt7drp.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
-        <link rel="stylesheet" href="/css/style.css">
-        <link rel="alternate" type="application/atom+xml" href="/feed.xml" title="micah johnston's blog">
-    </head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=335" />
+    <title>home — black and white memory</title>
+    <link rel="stylesheet" href="https://use.typekit.net/byt7drp.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+      integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
 
-    <body>
-        <div class="wrapper">
-            <div class="header">
-                <div class="header-image"></div>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <div class="header-image"></div>
 
-                <div class="header-link-section">
-                    <p class="header-link"><a href="/">home</a></p>
-                    <p class="header-link"><a href="/about">about me</a></p>
-                    <p class="header-link"><a href="/feed.xml">feed</a></p>
-                </div>
+        <div class="header-link-section">
+          <p class="header-link"><a href="/">home</a></p>
+          <p class="header-link"><a href="/about">about me</a></p>
+        </div>
 
-                <div class="header-link-section">
-                    <p class="header-link"><a href="https://github.com/micahrj">github</a></p>
-                    <p class="header-link"><a href="https://twitter.com/micahrjohnston">twitter</a></p>
-                    <p class="header-link"><a href="https://bsky.app/profile/micahrj.bsky.social">bluesky</a></p>
-                    <p class="header-link"><a href="https://mastodon.gamedev.place/@micahrj">mastodon</a></p>
-                </div>
-            </div>
+        <div class="header-link-section">
+          <p class="header-link">
+            <a href="https://github.com/muccichung">github</a>
+          </p>
+        </div>
+      </div>
 
-            <div class="body">
+      <div class="body"></div>
+    </div>
+  </body>
+</html>
 <div class="post-list">
+<div class="post">
+    <h2><a href="/posts/lenovo-m920x-unlock-bios">联想M920X解锁BIOS高级菜单教程</a></h2>
+    <div class="date">2025-02-25</div>
+    <p>去年闲暇的时候，把10年前的大主机换成了小巧的联想M920X，搭配CC150、Sparkle Arc A380半高刀卡。在官方说明中，这张A380仅兼容intel 10代以上平台，但我们可以关闭CSM，在老平台将其点亮，而要发挥其全部性能，则必须打开Resizable Bar和Above 4G Decoding。联想官方BIOS中隐藏了以上两个高级选项，需要解锁，另外，本机已提前解锁电源识别和PCIE功耗。</p><img alt="开孔很差劲的散热。" src="/posts/2025-05-25-lenovo-m920x-unlock-bios/m920x.jpg" />
+<p>使用到的工具：CH341A编程器，以及WinHex、UEFITool等铺助修改软件（后面提供下载地址）。</p><p><strong>注意：刷BIOS有风险，存在丢失保修和设备损坏之风险！</strong></p><h3>备份</h3><p>使用CH341A编程器分别读取两个独立的BIOS芯片，保存为16mb.bin、8mb.bin并备份；</p><h3>合并</h3><p>打开WinHex，通过“工具&gt;文件工具&gt;文件合并”合并上面保存的两个文件，命名为main.bin；</p>
+    <a href="posts/lenovo-m920x-unlock-bios">read more</a>
+</div>
 <div class="post">
     <h2><a href="/posts/llq">LLQ: A wait-free SPSC linked-list queue with recyclable nodes</a></h2>
     <div class="date">2022-12-04</div>
