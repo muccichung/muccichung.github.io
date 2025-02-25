@@ -1,0 +1,167 @@
+body {
+    padding: 50px;
+
+    font-family: 'source-sans-pro', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+
+    background-color: #fdfdfd;
+    color: #1c1d1e;
+}
+
+.post {
+    margin-bottom: 40px;
+}
+
+.date {
+    font-size: 13px;
+}
+
+h1 {
+    font-size: 22px;
+}
+
+h2 {
+    font-size: 20px;
+    margin: 19px 0 2px 0;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+h3 code {
+    font-size: 16px;
+}
+
+h1, h2, h3 {
+    font-weight: 400;
+}
+
+.header-image {
+    margin: 18px 0 16px 0;
+    background-image: url("/header.png");
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+}
+
+a {
+    color: #1c1d1e;
+    height: 18px;
+    margin-bottom: 2px;
+}
+
+a:hover {
+    color: #39a4db;
+}
+
+pre {
+    padding: 8px;
+    margin: 12px;
+    overflow-x: auto;
+}
+
+code, pre {
+    font-family: 'source-code-pro', monospace;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.header {
+    position: fixed;
+    width: 200px;
+    float: left;
+}
+
+.header p {
+    margin: 0;
+}
+
+.wrapper {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.body {
+    width: 800px;
+    float: right;
+    padding-bottom: 50px;
+    margin-top: 2px;
+    margin-right: 50px;
+}
+
+.header-link-section {
+    margin-bottom: 15px;
+}
+
+@media print, screen and (max-width: 1260px) {
+    .wrapper {
+        width: 800px;
+    }
+
+    .body {
+        width: 500px;
+    }
+}
+
+@media print, screen and (max-width: 960px) {
+    .wrapper {
+        width: auto;
+        margin: 0;
+    }
+
+    .body {
+        width: auto;
+        margin: 0;
+        padding: 0;
+    }
+
+    .header, .body {
+        float: none;
+        position: static;
+        width: auto;
+    }
+
+    .header {
+        margin-bottom: 30px;
+    }
+
+    .header-link-section {
+        padding: 0;
+        margin-bottom: 2px;
+        margin-right: 10px;
+    }
+
+    p.header-link {
+        display: inline-block;
+        margin-right: 2px;
+    }
+
+    .header-image {
+        width: 100px;
+        height: 100px;
+        margin: 0px 0 14px 0;
+    }
+}
+
+@media print, screen and (max-width: 720px) {
+    .body {
+        word-wrap: break-word;
+    }
+}
+
+@media print, screen and (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+}
+
+@media print {
+    body {
+        padding: 0.4in;
+        font-size: 12pt;
+        background-color: #fff;
+        color: #000;
+    }
+}
